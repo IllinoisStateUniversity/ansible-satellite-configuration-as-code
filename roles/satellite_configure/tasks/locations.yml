@@ -1,0 +1,22 @@
+---
+- name: Setup Location - On Campus
+  redhat.satellite.location:
+    name: On Campus
+    state: present
+    organizations:
+      - ORG
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+- name: Setup Location - AWS
+  redhat.satellite.location:
+    name: AWS
+    state: present
+    organizations:
+      - ORG
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"

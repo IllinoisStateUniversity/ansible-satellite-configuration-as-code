@@ -1,0 +1,31 @@
+---
+# tasks file for satellite_configure
+- name: Import Tasks - settings.yml
+  ansible.builtin.import_tasks: settings.yml
+
+- name: Import Tasks - locations.yml
+  ansible.builtin.import_tasks: locations.yml
+
+- name: Import Tasks - syncplans.yml
+  ansible.builtin.import_tasks: syncplans.yml
+
+- name: Import Tasks - redhat_repositories.yml
+  ansible.builtin.import_tasks: redhat_repositories.yml
+
+- name: Import Tasks - products.yml
+  ansible.builtin.import_tasks: products.yml
+
+- name: Import Tasks - lifecycle_environment.yml
+  ansible.builtin.import_tasks: lifecycle_environment.yml
+
+- name: Import Tasks - content_views.yml
+  ansible.builtin.import_tasks: content_views.yml
+
+- name: Import Tasks - host_collections.yml
+  ansible.builtin.import_tasks: host_collections.yml
+
+- name: Import Tasks - activation_keys.yml
+  ansible.builtin.import_tasks: activation_keys.yml
+
+- name: Import Tasks - auth.yml
+  ansible.builtin.import_tasks: auth.yml

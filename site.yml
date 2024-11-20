@@ -1,0 +1,20 @@
+---
+- name: Satellite - Configuration as Code
+  hosts: all
+  vars_files:
+    - "vars/{{ (satellite_environment == 'prod') | ternary('prod.yml', 'test.yml') }}"
+  # Extra Var
+  # satellite_environment: prod/test
+
+  roles:
+    - role: satellite_prereq
+      tags:
+        - prereq
+
+    - role: satellite_install
+      tags:
+        - install
+
+    - role: satellite_configure
+      tags:
+        - configure

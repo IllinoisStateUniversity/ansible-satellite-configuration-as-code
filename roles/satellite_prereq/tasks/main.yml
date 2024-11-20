@@ -1,0 +1,83 @@
+---
+# tasks file for satellite_prereq
+- name: Create Firewall Rules for Services
+  ansible.posix.firewalld:
+    state: enabled
+    service: "{{ item }}"
+    permanent: true
+    immediate: true
+  loop:
+    - dns
+    - dhcp
+    - tftp
+    - https
+    - http
+    - mqtt
+
+- name: Create Firewall Rules for Ports
+  ansible.posix.firewalld:
+    state: enabled
+    port: "{{ item }}"
+    permanent: true
+    immediate: true
+  loop:
+    - 5646-5647/tcp # amqp - Capsule - Katello agent
+    - 5910-5930/tcp # https - Browsers - Compute Resource virtual console
+    - 8000/tcp # http - Client - Provisioning templates / PXE Boot
+    - 8140/tcp # http - Client - Puppet agent
+    - 8443/tcp # http - Client - Content Host Registration
+    - 9090/tcp # http - OpenSCAP / Discovery / Capsule APO
+    - 9091/tcp # Cockpit
+
+- name: Register to Red Hat Subscription Management
+  community.general.redhat_subscription:
+    rhsm_baseurl: subscription.rhsm.redhat.com
+    state: present
+    org_id: "00000000"
+    activationkey: Your-Activation-Key
+
+- name: Configure Repos for Satellite Installation
+  community.general.rhsm_repository:
+    name:
+      - rhel-8-for-x86_64-baseos-rpms
+      - rhel-8-for-x86_64-appstream-rpms
+      - satellite-6.12-for-rhel-8-x86_64-rpms
+      - satellite-maintenance-6.12-for-rhel-8-x86_64-rpms
+    purge: true
+
+- name: Enable dnf Module satellite:el8
+  ansible.builtin.command: dnf module enable satellite:el8 --assumeyes --skip-broken
+  register: result
+  changed_when:
+    - '"Enabling module streams" in result.stdout'
+
+- name: Install Satellite package
+  ansible.builtin.yum:
+    name: "satellite-{{ satellite_version }}"
+    state: present
+
+- name: Ensure chrony & sos are Installed
+  ansible.builtin.yum:
+    name:
+      - chrony
+      - sos
+    state: present
+
+- name: Ensure chronyd is Enabled
+  ansible.builtin.systemd:
+    name: chronyd
+    enabled: true
+    state: started
+
+- name: SELinux Exception for Cockpit on Port 9091
+  community.general.seport:
+    ports: 9091
+    proto: tcp
+    setype: websm_port_t
+    state: present
+
+- name: SELinux Exception for Satellite LDAP Auth
+  ansible.posix.seboolean:
+    name: nis_enabled
+    state: true
+    persistent: true

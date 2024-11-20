@@ -1,0 +1,129 @@
+---
+- name: Create Activation Key for RHEL 7 Base in Test Satellite
+  redhat.satellite.activation_key:
+    organization: ORG
+    name: "ORG-ACTIVATION-KEY-RHEL-7-TEST"
+    description: Environment - {{ item }} / Content View - RHEL 7 Base
+    lifecycle_environment: "{{ item }}"
+    content_view: RHEL 7 Base
+    host_collections:
+      - RHEL - Servers
+      - RHEL 7 - Servers
+      - "RHEL 7 - {{ item }} - Servers"
+      - "RHEL - {{ item }} - Servers"
+    unlimited_hosts: true
+    purpose_usage: Development/Test
+    purpose_role: Red Hat Enterprise Linux Server
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  loop:
+    - Dev
+    - Test
+  when: aap_environment == "test"
+
+- name: Create Activation Key for RHEL 7 Base in Prod Satellite
+  redhat.satellite.activation_key:
+    organization: ORG
+    name: "ORG-ACTIVATION-KEY-RHEL-7-PROD"
+    description: Environment - Prod / Content View - RHEL 7 Base
+    lifecycle_environment: Prod
+    content_view: RHEL 7 Base
+    host_collections:
+      - RHEL - Servers
+      - RHEL 7 - Servers
+    unlimited_hosts: true
+    purpose_usage: Production
+    purpose_role: Red Hat Enterprise Linux Server
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  when: aap_environment == "prod"
+
+- name: Create Activation Key for RHEL 8 Base in Test Satellite
+  redhat.satellite.activation_key:
+    organization: ORG
+    name: "ORG-ACTIVATION-KEY-RHEL-8-TEST"
+    description: Environment - {{ item }} / Content View - RHEL 8 Base
+    lifecycle_environment: "{{ item }}"
+    content_view: RHEL 8 Base
+    host_collections:
+      - RHEL - Servers
+      - RHEL 8 - Servers
+      - "RHEL 8 - {{ item }} - Servers"
+      - "RHEL - {{ item }} - Servers"
+    unlimited_hosts: true
+    purpose_usage: Development/Test
+    purpose_role: Red Hat Enterprise Linux Server
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  loop:
+    - Dev
+    - Test
+  when: aap_environment == "test"
+
+- name: Create Activation Key for RHEL 8 Base in Prod Satellite
+  redhat.satellite.activation_key:
+    organization: ORG
+    name: "ORG-ACTIVATION-KEY-RHEL-8-PROD"
+    description: Environment - Prod / Content View - RHEL 8 Base
+    lifecycle_environment: Prod
+    content_view: RHEL 8 Base
+    host_collections:
+      - RHEL - Servers
+      - RHEL 8 - Servers
+    unlimited_hosts: true
+    purpose_usage: Production
+    purpose_role: Red Hat Enterprise Linux Server
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  when: aap_environment == "prod"
+
+- name: Create Activation Key for RHEL 9 Base in Test Satellite
+  redhat.satellite.activation_key:
+    organization: ORG
+    name: "ORG-ACTIVATION-KEY-RHEL-9-TEST"
+    description: Environment - {{ item }} / Content View - RHEL 9 Base
+    lifecycle_environment: "{{ item }}"
+    content_view: RHEL 9 Base
+    host_collections:
+      - RHEL - Servers
+      - RHEL 9 - Servers
+      - "RHEL 9 - {{ item }} - Servers"
+      - "RHEL - {{ item }} - Servers"
+    unlimited_hosts: true
+    purpose_usage: Development/Test
+    purpose_role: Red Hat Enterprise Linux Server
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  loop:
+    - Dev
+    - Test
+  when: aap_environment == "test"
+
+- name: Create Activation Key for RHEL 9 Base in Prod Satellite
+  redhat.satellite.activation_key:
+    organization: ORG
+    name: "ORG-ACTIVATION-KEY-RHEL-9-PROD"
+    description: Environment - Prod / Content View - RHEL 9 Base
+    lifecycle_environment: Prod
+    content_view: RHEL 9 Base
+    host_collections:
+      - RHEL - Servers
+      - RHEL 9 - Servers
+    unlimited_hosts: true
+    purpose_usage: Production
+    purpose_role: Red Hat Enterprise Linux Server
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  when: aap_environment == "prod"

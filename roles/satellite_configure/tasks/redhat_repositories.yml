@@ -1,0 +1,67 @@
+---
+- name: Enable Repo - rhel-7-server-rpms
+  redhat.satellite.repository_set:
+    organization: ORG
+    label: rhel-7-server-rpms
+    repositories:
+      - releasever: 7Server
+        basearch: x86_64
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+- name: Enable Repo - rhel-7-server-extras-rpms
+  redhat.satellite.repository_set:
+    organization: ORG
+    label: rhel-7-server-extras-rpms
+    repositories:
+      - basearch: x86_64
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+- name: Enable Repo - rhel-8-for-x86_64-baseos-rpms
+  redhat.satellite.repository_set:
+    organization: ORG
+    label: rhel-8-for-x86_64-baseos-rpms
+    repositories:
+      - releasever: "8"
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+- name: Enable Repo - rhel-8-for-x86_64-appstream-rpms
+  redhat.satellite.repository_set:
+    organization: ORG
+    label: rhel-8-for-x86_64-appstream-rpms
+    repositories:
+      - releasever: "8"
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+- name: Enable Repo - rhel-9-for-x86_64-baseos-rpms
+  redhat.satellite.repository_set:
+    organization: ORG
+    label: rhel-9-for-x86_64-baseos-rpms
+    repositories:
+      - releasever: "9"
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+- name: Enable Repo - rhel-9-for-x86_64-appstream-rpms
+  redhat.satellite.repository_set:
+    organization: ORG
+    label: rhel-9-for-x86_64-appstream-rpms
+    repositories:
+      - releasever: "9"
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"

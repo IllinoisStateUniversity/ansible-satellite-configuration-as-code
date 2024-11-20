@@ -1,0 +1,3 @@
+---
+# defaults file for satellite_prereq
+satellite_version: "6.12.1"

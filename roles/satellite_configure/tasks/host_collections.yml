@@ -1,0 +1,33 @@
+---
+- name: Create Host Collections in Test/Prod Satellite
+  redhat.satellite.host_collection:
+    organization: ORG
+    name: "{{ item }}"
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  loop:
+    - RHEL - Servers
+    - RHEL 7 - Servers
+    - RHEL 8 - Servers
+    - RHEL 9 - Servers
+
+- name: Create Host Collections in Test Satellite
+  redhat.satellite.host_collection:
+    organization: ORG
+    name: "{{ item }}"
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  loop:
+    - RHEL - Dev - Servers
+    - RHEL - Test - Servers
+    - RHEL 7 - Dev - Servers
+    - RHEL 7 - Test - Servers
+    - RHEL 8 - Dev - Servers
+    - RHEL 8 - Test - Servers
+    - RHEL 9 - Dev - Servers
+    - RHEL 9 - Test - Servers
+  when: aap_environment == "test"

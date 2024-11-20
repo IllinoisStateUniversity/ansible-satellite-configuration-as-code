@@ -1,0 +1,57 @@
+---
+- name: Create Content View - RHEL 7 Base
+  redhat.satellite.content_view:
+    organization: ORG
+    name: RHEL 7 Base
+    repositories:
+      - name: Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server
+        product: Red Hat Enterprise Linux Server
+      - name: Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64
+        product: Red Hat Enterprise Linux Server
+      - name: Microsoft RHEL 7 Prod
+        product: Microsoft
+      - name: EPEL 7
+        product: EPEL
+    solve_dependencies: true
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+- name: Create Content View - RHEL 8 Base
+  redhat.satellite.content_view:
+    organization: ORG
+    name: RHEL 8 Base
+    repositories:
+      - name: Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8
+        product: Red Hat Enterprise Linux for x86_64
+      - name: Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8
+        product: Red Hat Enterprise Linux for x86_64
+      - name: Microsoft RHEL 8 Prod
+        product: Microsoft
+      - name: EPEL 8
+        product: EPEL
+    solve_dependencies: true
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+- name: Create Content View - RHEL 9 Base
+  redhat.satellite.content_view:
+    organization: ORG
+    name: RHEL 9 Base
+    repositories:
+      - name: Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9
+        product: Red Hat Enterprise Linux for x86_64
+      - name: Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9
+        product: Red Hat Enterprise Linux for x86_64
+      - name: Microsoft RHEL 9 Prod
+        product: Microsoft
+      - name: EPEL 9
+        product: EPEL
+    solve_dependencies: true
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"

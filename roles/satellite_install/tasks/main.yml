@@ -1,0 +1,45 @@
+---
+# tasks file for satellite_install
+
+- name: Gather Facts
+  ansible.builtin.gather_facts:
+
+- name: Fully Update the System Before Installation
+  ansible.builtin.yum:
+    name: '*'
+    state: latest
+
+- name: Installation Variables
+  ansible.builtin.set_fact:
+    satellite_installer_scenario: satellite
+    satellite_installer_options:
+      - '--foreman-initial-organization "ORG"'
+      - '--foreman-initial-location "On Campus"'
+      - '--foreman-initial-admin-username admin'
+      - "--foreman-initial-admin-password {{ satellite_password }}"
+
+- name: Install Satellite
+  ansible.builtin.import_role:
+    name: redhat.satellite_operations.installer
+
+- name: Import Manifest in Test Satellite
+  redhat.satellite.subscription_manifest:
+    organization: ORG
+    state: present
+    manifest_path: ./roles/satellite_install/files/manifest-test.zip
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  when: aap_environment == 'test'
+
+- name: Import Manifest in Prod Satellite
+  redhat.satellite.subscription_manifest:
+    organization: ORG
+    state: present
+    manifest_path: ./roles/satellite_install/files/manifest.zip
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  when: aap_environment == 'prod'

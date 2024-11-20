@@ -1,0 +1,12 @@
+---
+- name: Create Sync Plan - Daily 2AM
+  redhat.satellite.sync_plan:
+    organization: ORG
+    name: Daily 2AM
+    interval: daily
+    enabled: true
+    sync_date: 2023-01-24 08:00:00 UTC # 2AM CST
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"

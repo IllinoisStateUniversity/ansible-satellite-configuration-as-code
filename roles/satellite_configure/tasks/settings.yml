@@ -1,0 +1,77 @@
+---
+# Administer > Settings
+# General Tab
+- name: Satellite URL
+  redhat.satellite.setting:
+    name: foreman_url
+    value: "{{ (satellite_environment == 'prod') | ternary('http://satellite.domain.com', 'http://satellite-test.domain.com') }}"
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+- name: Default language
+  redhat.satellite.setting:
+    name: default_locale
+    value: en
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+# Needed for Insights to work
+- name: Default timezone
+  redhat.satellite.setting:
+    name: default_timezone
+    value: Central Time (US & Canada)
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+# RH Cloud Tab
+- name: Automatic inventory upload
+  redhat.satellite.setting:
+    name: allow_auto_inventory_upload
+    value: true
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+- name: Synchronize recommendations Automatically
+  redhat.satellite.setting:
+    name: allow_auto_insights_sync
+    value: true
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+# Provisioning Tab
+- name: Unattended URL
+  redhat.satellite.setting:
+    name: unattended_url
+    value: "{{ (satellite_environment == 'prod') | ternary('http://satellite.domain.com', 'http://satellite-testdomain.com') }}"
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+# Facts Tab
+- name: Default location
+  redhat.satellite.setting:
+    name: default_location
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+
+- name: Default organization
+  redhat.satellite.setting:
+    name: default_organization
+    value: ORG
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"

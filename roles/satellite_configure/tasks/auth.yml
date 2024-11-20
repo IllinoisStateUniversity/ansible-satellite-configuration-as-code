@@ -1,0 +1,46 @@
+---
+- name: Setup LDAP Auth for Satellite Web Console
+  redhat.satellite.auth_source_ldap:
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+    organizations: ORG
+    locations:
+      - On Campus
+      - AWS
+    name: AD
+    host: ad.domain.com
+    port: 636
+    account: "{{ ldap_account }}"
+    account_password: "{{ ldap_password }}"
+    base_dn: DC=your,DC=domain,DC=com
+    groups_base: DC=your,DC=domain,DC=com
+    attr_login: sAMAccountName
+    attr_firstname: givenName
+    attr_lastname: sn
+    attr_mail: userPrincipalName
+    attr_photo: ''
+    onthefly_register: true
+    usergroup_sync: true
+    tls: true
+    server_type: active_directory
+
+- name: Setup Local User Group for Admin
+  redhat.satellite.usergroup:
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+    name: app_satellite_roles_admin
+    admin: true
+
+- name: Setup External AD Group for Use with Internal Satellite Group
+  redhat.satellite.external_usergroup:
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+    name: app_satellite_roles_admin
+    usergroup: app_satellite_roles_admin
+    auth_source: AD

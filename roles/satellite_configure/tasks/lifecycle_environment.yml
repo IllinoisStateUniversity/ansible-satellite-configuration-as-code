@@ -1,0 +1,33 @@
+---
+- name: Make Dev Lifecycle Environment
+  redhat.satellite.lifecycle_environment:
+    organization: ORG
+    name: Dev
+    prior: Library
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  when: aap_environment == 'test'
+
+- name: Make Test Lifecycle Environment
+  redhat.satellite.lifecycle_environment:
+    organization: ORG
+    name: Test
+    prior: Dev
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  when: aap_environment == 'test'
+
+- name: Make Prod Lifecycle Environment
+  redhat.satellite.lifecycle_environment:
+    organization: ORG
+    name: Prod
+    prior: Library
+    server_url: "{{ satellite_server_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password }}"
+    validate_certs: "{{ satellite_validate_certs }}"
+  when: aap_environment == 'prod'
