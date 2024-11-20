@@ -10,7 +10,7 @@ The Ansible playbook in this repository automates the installation and configura
 2. **Installs Red Hat Satellite** on the target hosts.
 3. **Configures Satellite** with necessary settings, organizations, locations, repositories, and more.
 
-## ## Prerequisites
+## Prerequisites
 
 - **Ansible Automation Platform (AAP) or AWX**: The playbook is designed to run within AAP or AWX.
 - **Ansible Version**: Ansible 2.9 or higher is recommended.
@@ -21,7 +21,7 @@ The Ansible playbook in this repository automates the installation and configura
     - `redhat.satellite`
     - `redhat.satellite_operations`
 
-## ## Configuration
+## Configuration
 
 ### Variables
 
